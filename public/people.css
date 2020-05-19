@@ -1,0 +1,48 @@
+.all-users {
+    height: 100vh;
+    margin-left: 20vh;
+    margin-right: 20vh;
+}
+
+.heading {
+    text-align: center;
+    margin-top: 0vh;
+    color: aqua;
+}
+
+.block {
+    display: flex;
+}
+
+.user {
+    padding: 20px;
+    display: flex;
+    width: auto;
+    flex-grow: 1;
+}
+
+.user-image {
+    border-radius: 100px;
+}
+
+.user-info {
+    margin-left: 12px;
+    flex-grow: 1;
+
+}
+
+.name {
+    color: blue;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.friend-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.friend-button img {
+    margin-right: 5px;
+}

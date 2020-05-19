@@ -1,0 +1,34 @@
+h1{
+    text-align: center;
+}
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: blue 5px solid;
+}
+.main{
+    border: black 2px solid;
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.searchFriends{
+    border: black solid 3px;
+    flex-grow: 1;
+}
+.UsersContent{
+    border: black 2px solid;
+    width: 50vh;
+    overflow-y: auto;
+    flex-grow: 2;
+}
+.UsersFriends{
+    border: black 2px solid;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.logo{
+    background-color: aqua;
+}

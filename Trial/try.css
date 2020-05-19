@@ -1,0 +1,50 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+.main{
+    border: black 2px solid;
+    height: 100;
+    width: 90vh;
+}
+.heading{
+    
+    text-align: center;
+}
+article{
+    
+    margin-left: 15vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: black 3px solid;
+    height:70vh;
+    width: 60vh;
+}
+header {
+    padding: 5px;
+    margin-top: 5px;
+    border: black 2px solid;
+    display: flex;
+}
+
+header .info{
+    display: flex;
+    margin-left: 3px;
+    flex-grow: 12;
+    justify-content: center;
+}
+header .user-image{
+    width: 60px;
+    border-radius: 100px;
+}
+.main-content{
+    display: flex;
+    justify-content: center;
+    margin-top: 3px;
+    border: black 2px solid;
+}
+.main-content img{
+    width: 500px;
+
+    
+}

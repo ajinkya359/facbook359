@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Your feeds
+    </title>
+    <link rel="stylesheet" href="home.css">
+  </head>
+  <body>
+    <div class="main">
+      <div class="heading">
+        Feeds
+      </div>
+      
+          <%for(user in h){%>
+        
+                <article class="feed">
+                    <header class="poster-info">
+                      <div class="name">
+                        <img class ="user-image"src="/UserImages/<%=h[user].userimage%>">
+                      </div>
+                      <div class="info">
+                        <%=h[user].username%>
+                      </div>
+                    </header>
+                   <div class="main-content">
+            <img src="/uploads/<%=h[user].image%>" >
+                   </div>
+                   <div class="reactions">
+                       
+                           <button class="likes" id='<%=h[user].id%>' onclick="hi(this)"><%=h[user].likes%></button>
+                       
+
+                   </div>
+                  </article>
+                  
+            
+            <%}%>
+      
+    
+    </div>
+  <script>
+function hi(t){
+  console.log('hi')
+var btn=document.getElementById(`${t.id}`);
+var http=new XMLHttpRequest();
+http.open('post','http://localhost:5000/likes')
+http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+http.send(`imageid=${t.id}`)
+http.onload=()=>{
+  console.log(http.responseText);
+  var likes=JSON.parse(http.responseText);
+  btn.innerHTML=likes;
+}
+}
+  </script>
+  </body>
+</html>

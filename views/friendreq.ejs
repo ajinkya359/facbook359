@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="people.css" />
+  </head>
+
+  <body style="margin-left: 30vh; margin-right: 30vh;">
+    <div
+      style="
+        border: 2px black solid;
+        height: 5vh;
+        display: flex;
+        justify-content: center;
+      "
+    >
+      <input
+        type="text"
+        name="searchUser"
+        class="searchUser"
+        onchange=""
+        placeholder="Search Here"
+      />
+    </div>
+    <div class="all-users" style="border: 2px solid black;">
+      <ul>
+        <% for(name in h){%>
+        <li>
+          <div class="block">
+            <div class="user">
+              <a href="/chat    ">
+                <img style="width: 150px;"
+                  class="user-image"
+                  src="/UserImages/<%=h[name].image%>"
+                />
+              </a>
+              <div class="user-info">
+                <div class="name">
+                  <span class="user-name"><%=h[name].name%></span>
+                  <span class="user-image" hidden><%=h[name].image%></span>
+                  <form action="http://localhost:5000/managefreq" method="POST">
+                    <input name="from" value=<%=h[name].id%> hidden>
+                    <input name="to" value=<%=id%> hidden>
+                    <input name="action" value=1 hidden>  
+                    <button>
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/kVdNswoBB9_.png"
+                      />
+                      <div>Accept</div>
+                    </button>
+                  </form>
+                  <form action="http://localhost:5000/managefreq" method="POST">
+                    <input name="from" value=<%=h[name].id%> hidden>
+                    <input name="to" value=<%=id%> hidden>
+                    <input name="action" value=0 hidden>
+                      <button>
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/kVdNswoBB9_.png"
+                      />
+                      <div>Delete</div>
+                    </button>
+                  </form>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      
+        <%} %>
+      </ul>
+    </div>
+    <script>
+      var lis = document.querySelectorAll(
+        ".all-users ul li .block .user .user-info .name .user-name"
+      );
+      var images=document.querySelectorAll(
+        ".all-users ul li .block .user .user-info .name .user-image"
+      );
+      console.log(lis);
+      document
+        .querySelector(".searchUser")
+        .addEventListener("change", function () {
+          document.querySelector(".all-users ul").innerHTML = " ";
+          for (var i = 0; i < lis.length; i++) {
+            if (
+              lis[i].innerHTML.includes(
+                document.querySelector(".searchUser").value
+              )
+            )
+              document.querySelector(
+                ".all-users ul"
+              ).innerHTML += `<li> <div class="block">
+                <div class="user">
+                  <a href="/chat    ">
+                    <img style="width: 150px;"
+                      class="user-image"
+                      src="/UserImages/${images[i].innerHTML}"
+                    />
+                  </a>
+                  <div class="user-info">
+                    <div class="name">
+                      <span class="user-name"><%=h[name][0]%></span>
+                      <span class="user-image" hidden><%=h[name][2]%></span>
+                      <form action="http://localhost:5000/addfollower" method="POST">
+                        <input name="friendid" value=${lis[i].innerHTML} hidden>
+                        <input name="userid" value=<%=id%> hidden>
+                          <button>
+                          <img
+                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/kVdNswoBB9_.png"
+                          />
+                          <div>Follow</div>
+                        </button>
+                      </form>
+                      <form action="http://localhost:5000/addfollower" method="POST">
+                        <input name="friendid" value=${lis[i].innerHTML} hidden>
+                        <input name="userid" value=<%=id%> hidden>
+                          <button>
+                          <img
+                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/kVdNswoBB9_.png"
+                          />
+                          <div>Follow</div>
+                        </button>
+                      </form>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div></li>`;
+          }
+        });
+    </script>
+  </body>
+</html>

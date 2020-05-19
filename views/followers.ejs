@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="people.css" />
+  </head>
+
+  <body style="margin-left: 30vh; margin-right: 30vh;">
+    <div
+      style="
+        border: 2px black solid;
+        height: 5vh;
+        display: flex;
+        justify-content: center;
+      "
+    >
+      <input
+        type="text"
+        name="searchUser"
+        class="searchUser"
+        onchange=""
+        placeholder="Search Here"
+      />
+    </div>
+    <div class="all-users" style="border: 2px solid black;">
+      <ul>
+        <% for(name in h){%>
+        <li>
+          <div class="block">
+            <div class="user">
+              <a href="/chat    ">
+                <img style="width: 150px;"
+                  class="user-image"
+                  src="/UserImages/<%=h[name].image%>"
+                />
+              </a>
+              <div class="user-info">
+                <div class="name">
+                  <span class="user-name"><%=h[name].name%></span>
+                  <span class="user-image" hidden><%=h[name].image%></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      
+        <%} %>
+      </ul>
+    </div>
+    <script>
+      var lis = document.querySelectorAll(
+        ".all-users ul li .block .user .user-info .name .user-name"
+      );
+      var images=document.querySelectorAll(
+        ".all-users ul li .block .user .user-info .name .user-image"
+      );
+      document
+        .querySelector(".searchUser")
+        .addEventListener("change", function () {
+          document.querySelector(".all-users ul").innerHTML = " ";
+          for (var i = 0; i < lis.length; i++) {
+            if (
+              lis[i].innerHTML.includes(
+                document.querySelector(".searchUser").value
+              )
+            )
+              document.querySelector(
+                ".all-users ul"
+              ).innerHTML += `<li> <div class="block">
+                <div class="user">
+                  <a href="/chat    ">
+                    <img style="width: 150px;"
+                      class="user-image"
+                      src="/UserImages/${images[i].innerHTML}"
+                    />
+                  </a>
+                  <div class="user-info">
+                    <div class="name">
+                      <span class="user-name">${lis[i].innerHTML}</span>
+                      <span class="user-image" hidden>${images[i].innerHTML}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li></li>`;
+          }
+        });
+    </script>
+  </body>
+</html>

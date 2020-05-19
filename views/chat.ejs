@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font: 13px Helvetica, Arial;
+      }
+      form {
+        background: #000;
+        padding: 3px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      form input {
+        border: 0;
+        padding: 10px;
+        width: 90%;
+        margin-right: 0.5%;
+      }
+      form button {
+        width: 9%;
+        background: rgb(130, 224, 255);
+        border: none;
+        padding: 10px;
+      }
+      #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      #messages li {
+        padding: 5px 10px;
+      }
+      #messages li:nth-child(odd) {
+        background: #eee;
+      }
+      .pvt{
+        color: gray;
+        font: italic;
+      }
+      .err{
+        color: red;
+        font: bold;
+      }
+    </style>
+  </head>
+  <body style="height: 70vh;display: flex;justify-content: space-between;">
+    <div style="height: 95vh;">
+    <ul id="messages" style="overflow-y: auto;"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="name" hidden value="<%=name %>" />
+    </form>
+    </div>
+    <div >
+      <h1 style="text-align: center;"><%=name%></h1>
+    </div>
+    <div >
+      <h1>Online user</h1>
+      <button onclick="global(this)" id="global">Global</button>
+      <ul id="online-users" style="overflow-y: auto;"></ul>
+
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+      var current=""
+      var temp=document.getElementById('global');
+      temp.style="background-color:aqua"
+      function global(button){
+        temp.style="background-color:white"
+        temp=button
+        current =""
+        button.style="background-color:aqua"
+        
+      }
+      function talkinprivate(button){
+        temp.style="background-color:white"
+        temp=button
+        current=button.value;
+        button.style="background-color:aqua"
+        current="/w "+current
+      }
+      const socket = io();//and this is the socket from 
+      function newuser(){
+        socket.emit('newUser',document.getElementById('name').value);
+
+      }
+      newuser();
+      document.querySelector('form').addEventListener('submit',(event)=>{
+        var msg=current+" "+document.getElementById("m").value.trim();
+        event.preventDefault();
+        
+        socket.emit('chat-message',document.getElementById('name').value,msg,function(data){
+          document.querySelector('#messages').innerHTML+=`<li class="err"> ${data}</li>`;
+
+        });
+        document.getElementById("m").value="";
+        
+      })
+      
+      socket.on('chat-message',(from,message)=>{
+        var node=document.createElement('li');
+        node.appendChild(document.createTextNode(from+": "+message));
+        document.getElementById('messages').appendChild(node);
+      })
+      socket.on('disconnected',(from)=>{
+        var node=document.createElement('li');
+      
+        node.appendChild(document.createTextNode(from+' Has connected'));
+        document.getElementById('messages').appendChild(node);
+      })
+      socket.on('newUser',(onlineUsers)=>{
+        document.querySelector('#online-users').innerHTML=" ";
+        onlineUsers.forEach(name => {
+          document.querySelector('#online-users').innerHTML+=`<li><button value="${name}" onclick="talkinprivate(this)">${name}</button></li>`;
+        });
+      })
+      socket.on('private-message',(from,message)=>{
+        document.querySelector('#messages').innerHTML+=`<li class="pvt">${from}: ${message}</li>`;
+
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="chat1.css"> 
+    </head>
+    <body>
+        <span id="user-id"><%=id%></span>
+        <div class="main-body">
+            <div class="friends-list">
+                <div class="list-heading">friends list</div>
+                <div class="list">
+                    <div class="friends">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="messages">
+                <div class="heading">
+                    <div class="chat-user-image">
+                        photo
+                    </div>
+                    <div class="chat-user-info">
+                        Global
+                    </div>
+                </div>
+                <div class="messages-body">
+                  <div class="me">
+                      <div>
+                          this is my message
+                      </div>
+                  </div>
+                  <div class="me">
+                    <div>
+                        this is my message
+                    </div>
+                </div>
+                <div class="other">
+                    <div>
+other                    </div>
+                </div>
+                </div>
+                <div class="new">
+                    <input id="message" placeholder="message">
+                    <button class="send-button"> Send</button>
+                </div>
+            </>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script>
+            
+            const socket=io();
+            function newonline(){
+                socket.emit('new-online',document.getElementById('user-id').innerHTML)
+            }
+            socket.on('new-online',(list)=>{
+                
+            })
+            newonline();
+            var http=new XMLHttpRequest();
+            http.open('get','http://localhost:5000/chat-friends');
+            http.send();
+            var friends;
+            http.onload=()=>{
+                console.log(http.responseText)
+                friends = JSON.parse(http.responseText);
+                console.log(friends)
+                var list=document.querySelector('.list');
+                friends.forEach(friend=>{
+                    list.innerHTML+=` <div class="friends ">
+                        <div class="friends-image">
+                            <img src="UserImages/${friend.image}">
+                        </div>
+                        <div class="friends-name">
+                           <button onclick="messagefriend(this)" id="${friend.id}" > ${friend.name}</button>
+                        </div>
+                    </div>`
+                }) 
+            }         
+            var send=document.querySelector('.send-button');
+                send.addEventListener('click',()=>{
+                    var input=document.getElementById('message');
+                    var mymessages=document.querySelector('.messages-body');
+                    mymessages.innerHTML+=`<div class="me">
+                        <div>
+                            ${input.value}
+                        </div>
+                    </div>`
+                    input.value=""
+                })
+            function messagefriend(data){
+                var name=document.querySelector('.chat-user-info');
+                name.innerHTML=`${data.innerHTML}`
+                
+            }
+        </script>
+    </body>
+</html>

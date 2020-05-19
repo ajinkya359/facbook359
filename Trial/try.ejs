@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .all-users li {
+            font-size: xx-large;
+            margin-left: 50vh;
+        }
+    </style>
+</head>
+
+<body style="margin-left: 30vh;margin-right: 30vh;">
+    <div style="border: 2px black solid; height: 5vh;display: flex; justify-content: center;">
+        <input type="text" name="searchUser" class="searchUser" onchange="" placeholder="Search Here" />
+    </div>
+    <div class="all-users" style="height: auto;border: 2px solid black;height: 95vh;">
+        <ul>
+            <% for(name in h){%>
+            <li><span class="name"><%=h[name]%></span></li>
+            <%} %>
+        </ul>
+    </div>
+    <script>
+        var lis = document.querySelectorAll(".all-users li .name");
+        var users = '<%- JSON.stringify(h) %>';
+        console.log(users)
+        document.querySelector(".searchUser").addEventListener("change", function () {
+            document.querySelector(".all-users").innerHTML = "";
+            for (var i = 0; i < lis.length; i++) {
+                if (lis[i].innerHTML.includes(document.querySelector(".searchUser").value))
+                    document.querySelector('.all-users').innerHTML += `<li>${lis[i].innerHTML}</li>`
+            }
+
+        })
+    </script>
+</body>
+
+</html>

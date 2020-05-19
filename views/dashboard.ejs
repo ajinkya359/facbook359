@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DashBoard</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/dashboard.css">
+
+</head>
+<input type="checkbox" id="check">
+<body >
+<header>
+    <label for="check">
+        <i class="fa fa-bars" aria-hidden="true" id="sidebar_btn"></i>
+    </label>
+    <div class="left_area" >
+        <h3>Mel<span>Jol</span></h3>
+    </div>
+    <a class="right_btn" href="/users/logout" %> >Logout</a>
+</header>
+
+<div class="sidebar" >
+    <center>
+        <img src="/UserImages/<%=image  %> " class="profile_image">
+        <h4><%=name%></h4>
+    </center>
+    <a href="/home"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a>
+    <a href="/dashboard"><i class="fa fa-desktop" aria-hidden="true"></i><span>Dashboard</span></a>
+    <a href="/chat"><i class="fa fa-commenting" aria-hidden="true"></i><span>Chat</span></a>
+
+    <a href="/people"><i class="fa fa-users" aria-hidden="true"></i><span>People</span></a>
+    <a href="/following"><i class="fa fa-users" aria-hidden="true"></i><span>Following</span></a>
+    <a href="/friends"><i class="fa fa-users" aria-hidden="true"></i><span>Friends</span></a>
+    <a href="/friendreq"><i class="fa fa-commenting" aria-hidden="true"></i><span>Requests</span></a>
+    <a href="/upload"><i class="fa fa-commenting" aria-hidden="true"></i><span>Upload</span></a>
+    <a href="/upload"><i class="fa fa-commenting" aria-hidden="true"></i><span>Upload</span></a>
+    <a href="/upload"><i class="fa fa-commenting" aria-hidden="true"></i><span>Upload</span></a>
+    <a href="/upload"><i class="fa fa-commenting" aria-hidden="true"></i><span>Upload</span></a>
+    <a href="/upload"><i class="fa fa-commenting" aria-hidden="true"></i><span>Upload</span></a>
+
+  
+</div>
+<div class="content">
+
+    
+    
+    </div>
+     <script>
+      var lis = document.querySelectorAll(
+        ".all-users ul li .block .user .user-info .name .user-name"
+      );
+      var images=document.querySelectorAll(
+        ".all-users ul li .block .user .user-info .name .user-image"
+      );
+      document
+        .querySelector(".searchUser")
+        .addEventListener("change", function () {
+          document.querySelector(".all-users ul").innerHTML = " ";
+          for (var i = 0; i < lis.length; i++) {
+            if (
+              lis[i].innerHTML.includes(
+                document.querySelector(".searchUser").value
+              )
+            )
+              document.querySelector(
+                ".all-users ul"
+              ).innerHTML += `<li> <div class="block">
+                <div class="user">
+                  <a href="/chat    ">
+                    <img style="width: 150px;"
+                      class="user-image"
+                      src="/UserImages/${images[i].innerHTML}"
+                    />
+                  </a>
+                  <div class="user-info">
+                    <div class="name">
+                      <span class="user-name">${lis[i].innerHTML}</span>
+                      <span class="user-image" hidden>${images[i].innerHTML}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li></li>`;
+          }
+        });
+    </script>
+ 
+</body>
+</html>

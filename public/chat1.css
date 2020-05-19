@@ -1,0 +1,118 @@
+body{
+    
+}
+.main-body{
+    border: black 2px solid;
+    height: 80vh;
+    margin :70px 200px ;
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+}
+.friends-list{
+    border: black 2px solid;
+    flex-grow: 1;
+    margin-right: 2px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+}
+.messages{
+    border: black 2px solid;
+    flex-grow: 1;
+    margin-left: 2px;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+.messages .heading{
+    border: black 2px solid;
+    display: flex;
+}
+.messages .heading .chat-user-image{
+    border: black 2px solid;
+    display: flex;
+    margin-right:   2px;
+}
+.messages .heading .chat-user-info{
+    border: black 2px solid;
+    display: flex;
+    flex-grow: 3;
+}
+
+.messages .messages-body{
+    border: black 2px solid;
+    flex-grow: 6;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    overflow-y: auto;
+    padding: 2px;
+}
+.new{
+    border: black 2px solid;
+    display: flex;
+    padding: 2px;
+}
+.new input{
+    flex-grow: 1;
+}
+.other {
+    margin-bottom: 5px;
+    display: flex;
+    
+    padding: 2px;
+    
+}
+.other div{
+    color: white;
+    background-color:gray;
+    border: black 2px solid;
+    margin-bottom: 2px;
+    border-radius: 5px 5px 5px 0px;
+}
+.me {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row-reverse ;
+    padding: 2px;
+    
+}
+.me div{
+    flex-wrap: wrap;
+    color: white;
+    background-color:blue;
+    border: black 2px solid;
+    margin-bottom: 2px;
+    border-radius: 5px 5px 0px 5px;
+}
+.list-heading{
+    border: black 2px solid;
+
+}
+.list{
+    border: black 2px solid;
+    flex-grow: 1;
+    margin-top: 2px;
+    padding: 2px;
+}
+.friends{
+    border: black 2px solid;
+    height: 10vh;
+    display: flex;
+}
+.friends-image {
+    border: black 2px solid;
+
+}
+.friends-image img{
+    width: 10vh;
+    margin-top: 2vh;
+    border-radius: 100px;
+}
+.friends-name{
+    border: black 2px solid;
+    flex-grow: 1;
+    margin-left: 2px;
+    padding: 2px;
+}
